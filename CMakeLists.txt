@@ -9,32 +9,52 @@ project(
 
 include(cmake/add_cpm_module.cmake)
 
-option(CMP_USE_spirv_headers, "", false);
-include(modules/spirv_headers.cmake)
+option(CPM_USE_spirv_headers "" false)
+if (${CPM_USE_spirv_headers})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/spirv_headers.cmake)
+endif()
 
-option(CMP_USE_spirv_tools, "", false);
-include(modules/spirv_tools.cmake)
+option(CPM_USE_spirv_tools "" false)
+if (${CPM_USE_spirv_tools})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/spirv_tools.cmake)
+endif()
 
-option(CMP_USE_spirv_cross, "", false);
-include(modules/spirv_cross.cmake)
+option(CPM_USE_spirv_cross "" false)
+if (${CPM_USE_spirv_cross})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/spirv_cross.cmake)
+endif()
 
-option(CMP_USE_python, "", false);
-include(modules/python.cmake)
+option(CPM_USE_python "" false)
+if (${CPM_USE_python})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/python.cmake)
+endif()
 
-option(CMP_USE_glslang, "", false);
-include(modules/glslang.cmake)
+option(CPM_USE_glslang "" false)
+if (${CPM_USE_glslang})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/glslang.cmake)
+endif()
 
-option(CMP_USE_libmdbx, "", false);
-include(modules/libmdbx.cmake)
+option(CPM_USE_libmdbx "" false)
+if (${CPM_USE_libmdbx})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/libmdbx.cmake)
+endif()
 
-option(CMP_USE_basis_universal, "", false);
-include(modules/basis_universal.cmake)
+option(CPM_USE_basis_universal "" false)
+if (${CPM_USE_basis_universal})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/basis_universal.cmake)
+endif()
 
-option(CMP_USE_glfw, "", false);
-include(modules/glfw.cmake)
+option(CPM_USE_glfw "" false)
+if (${CPM_USE_glfw})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/glfw.cmake)
+endif()
 
-option(CMP_USE_imgui, "", false);
-include(modules/imgui.cmake)
+option(CPM_USE_imgui "" false)
+if (${CPM_USE_imgui})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/imgui.cmake)
+endif()
 
-option(CMP_USE_framegraph, "", false);
-include(modules/framegraph.cmake)
+option(CPM_USE_framegraph "" false)
+if (${CPM_USE_framegraph})
+	include(${CMAKE_CURRENT_LIST_DIR}/modules/framegraph.cmake)
+endif()
