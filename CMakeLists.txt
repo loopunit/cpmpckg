@@ -13,3 +13,8 @@ function(CPMAddBaseModule CPM_ARGS_NAME)
 	# NOTE: assume cpmpckg was added with cpm
 	include(${cpmpckg_SOURCE_DIR}/modules/${CPM_ARGS_NAME}.cmake)
 endfunction()
+
+function(CPMAddModule CPM_ARGS_NAME)
+	# NOTE: assume cpmpckg was added with cpm
+	include(${${CPM_ARGS_NAME}_SOURCE_DIR}/modules/${CPM_ARGS_NAME}.cmake)
+endfunction()
