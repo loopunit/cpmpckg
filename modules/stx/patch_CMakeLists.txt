@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.14)
+
+project(stx)
+
+include(GNUInstallDirs)
+
+add_library(stx STATIC 	
+	src/panic/hook.cc 
+	src/panic.cc)
+
+target_include_directories(stx 
+	PUBLIC include)
+
+set_target_properties(stx PROPERTIES CXX_STANDARD 17)
+
+install(DIRECTORY include/stx
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(TARGETS stx
+	LIBRARY
+		DESTINATION ${CMAKE_INSTALL_LIBDIR})
