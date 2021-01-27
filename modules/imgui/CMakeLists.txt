@@ -28,11 +28,22 @@ endif()
 
 configure_file(patch_CMakeLists.txt ${imgui_SOURCE_DIR}/CMakeLists.txt COPYONLY)
 
-ExternalProject_Add(imgui_cpm
-    PREFIX "${CMAKE_BINARY_DIR}"
-    DOWNLOAD_COMMAND ""
-    SOURCE_DIR "${imgui_SOURCE_DIR}"
-    INSTALL_DIR ${CPM_RUNTIME_CACHE}/imgui
-    CMAKE_CACHE_ARGS 
-        -DCMAKE_BUILD_TYPE:STRING=${CPM_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
+if (${CPM_FOR_TOOLCHAIN})
+    if (${CPM_FOR_RUNTIME})
+        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
+    endif()
+
+    set(CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/imgui)
+	set(BUILD_TESTING Off)
+
+    add_subdirectory(${imgui_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/imgui_cpm_toolchain)
+else()
+    if (NOT ${CPM_FOR_RUNTIME})
+        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
+    endif()
+    
+    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/imgui)
+	set(BUILD_TESTING Off)
+    
+    add_subdirectory(${imgui_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/imgui_cpm_runtime)
+endif()

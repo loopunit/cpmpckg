@@ -15,6 +15,9 @@ endif()
 
 include(ExternalProject)
 include(${CPM_SCRIPTS}/CPM.cmake)
+include(${CPM_SCRIPTS}/add_cpm_module.cmake)
+
+CPMAddBaseModule(glslang)
 
 CPMAddPackage(
     NAME VulkanMemoryAllocator
@@ -22,11 +25,19 @@ CPMAddPackage(
     GIT_TAG "v2.2.0"
     DOWNLOAD_ONLY true)
 
+if(NOT ${VulkanMemoryAllocator_ADDED})
+	message( FATAL_ERROR "Could not find VulkanMemoryAllocator" )
+endif()
+
 CPMAddPackage(
     NAME FrameGraph
     GITHUB_REPOSITORY azhirnov/FrameGraph
     GIT_TAG 08271fe48e1bf1fb783b0f21fc6afe5c650cd6ec
     DOWNLOAD_ONLY true)
+
+if(NOT ${FrameGraph_ADDED})
+	message( FATAL_ERROR "Could not find FrameGraph" )
+endif()
 
 configure_file(patch_CMakeLists.txt                                 ${FrameGraph_SOURCE_DIR}/CMakeLists.txt COPYONLY)
 configure_file(patch_framegraph_CMakeLists.txt                      ${FrameGraph_SOURCE_DIR}/framegraph/CMakeLists.txt COPYONLY)
@@ -50,14 +61,8 @@ else()
         message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
     endif()
 
-    ExternalProject_Add(FrameGraph_cpm
-        PREFIX "${CMAKE_BINARY_DIR}"
-        DOWNLOAD_COMMAND ""
-        SOURCE_DIR "${FrameGraph_SOURCE_DIR}"
-        INSTALL_DIR "${CPM_RUNTIME_CACHE}/FrameGraph"
-        CMAKE_CACHE_ARGS 
-            -DCPM_RUNTIME_CACHE:PATH=${CPM_RUNTIME_CACHE}
-            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-            -DCMAKE_BUILD_TYPE:STRING=${CPM_BUILD_TYPE}
-            -DVulkanMemoryAllocator_SOURCE_DIR:PATH=${VulkanMemoryAllocator_SOURCE_DIR})
+    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/FrameGraph)
+    set(VulkanMemoryAllocator_SOURCE_DIR ${VulkanMemoryAllocator_SOURCE_DIR})
+
+    add_subdirectory(${FrameGraph_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/FrameGraph_cpm_runtime)
 endif()

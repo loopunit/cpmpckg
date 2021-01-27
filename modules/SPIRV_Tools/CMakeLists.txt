@@ -15,7 +15,9 @@ endif()
 
 include(ExternalProject)
 include(${CPM_SCRIPTS}/CPM.cmake)
+include(${CPM_SCRIPTS}/add_cpm_module.cmake)
 
+CPMAddBaseModule(spirv_headers)
 
 if (${CPM_FOR_TOOLCHAIN})
     if (${CPM_FOR_RUNTIME})
@@ -26,18 +28,12 @@ if (${CPM_FOR_TOOLCHAIN})
         NAME SPIRV_Tools
         GITHUB_REPOSITORY KhronosGroup/SPIRV-Tools
         GIT_TAG 17ffa89097b26efeb323e6963220326b5ffb2baf
-        DOWNLOAD_ONLY true)
-
-    ExternalProject_Add(SPIRV_Tools_cpm
-        PREFIX "${CMAKE_BINARY_DIR}"
-        DOWNLOAD_COMMAND ""
-        SOURCE_DIR "${SPIRV_Tools_SOURCE_DIR}"
-        INSTALL_DIR ${CPM_TOOLCHAIN_CACHE}/SPIRV_Tools
-        CMAKE_CACHE_ARGS 
-		    -DSPIRV_TOOLS_SKIP_EXAMPLES:BOOL=On
-            -DSPIRV-Headers_SOURCE_DIR:PATH=${CPM_TOOLCHAIN_CACHE}/SPIRV_Headers
-            -DCMAKE_BUILD_TYPE:STRING=${CPM_BUILD_TYPE} 
-            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
+	    OPTIONS 
+            "ENABLE_CTEST Off"
+            "DBUILD_TESTING Off"
+		    "SPIRV_TOOLS_SKIP_EXAMPLES On"
+            "SPIRV-Headers_SOURCE_DIR ${CPM_TOOLCHAIN_CACHE}/SPIRV_Headers"
+            "CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/SPIRV_Tools")
 else()
     if (NOT ${CPM_FOR_RUNTIME})
         message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")

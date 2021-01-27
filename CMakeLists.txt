@@ -7,14 +7,21 @@ project(
   VERSION 0.0.0
 )
 
+set(cpmpckg_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}")
 include(cmake/add_cpm_module.cmake)
 
-function(CPMAddBaseModule CPM_ARGS_NAME)
-	# NOTE: assume cpmpckg was added with cpm
-	include(${cpmpckg_SOURCE_DIR}/modules/${CPM_ARGS_NAME}.cmake)
-endfunction()
-
-function(CPMAddModule CPM_ARGS_NAME)
-	# NOTE: assume cpmpckg was added with cpm
-	include(${${CPM_ARGS_NAME}_SOURCE_DIR}/modules/${CPM_ARGS_NAME}.cmake)
-endfunction()
+if (true)
+	#CPMAddBaseModule(imgui)
+	#CPMAddBaseModule(libmdbx)
+	#CPMAddBaseModule(python)
+	#CPMAddBaseModule(spirv_headers)
+	#CPMAddBaseModule(spirv_cross)
+	#CPMAddBaseModule(spirv_tools)
+	#CPMAddBaseModule(basis_universal)
+	#CPMAddBaseModule(glfw)
+	#CPMAddBaseModule(glslang)
+	#CPMAddBaseModule(framegraph)
+	
+	#add_executable(test test/main.cpp)
+	#set_target_properties(test PROPERTIES CXX_STANDARD 17)
+endif()

@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.10 FATAL_ERROR )
+cmake_minimum_required( VERSION 3.14 FATAL_ERROR )
 
 message( STATUS "===========================================================================\n" )
 message( STATUS "  OVERRIDE OVERRIDE OVERRIDE OVERRIDE OVERRIDE OVERRIDE OVERRIDE OVERRIDE\n" )
@@ -148,9 +148,9 @@ if (true)
 	
 		#set( CONFIGURATION_DEPENDENT_PATH ON CACHE INTERNAL "" FORCE )
 				
-		string( FIND "${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}" "." outLength )
+		string( FIND "${CMAKE_SYSTEM_VERSION}" "." outLength )
 		if ( (outLength GREATER -1) )
-			string( SUBSTRING "${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}" 0 ${outLength} WINDOWS_TARGET_VERSION )
+			string( SUBSTRING "${CMAKE_SYSTEM_VERSION}" 0 ${outLength} WINDOWS_TARGET_VERSION )
 		endif() 
 		#--------------------------------------------
 		#message( STATUS "CMAKE_C_FLAGS: ${CURRENT_C_FLAGS}" )

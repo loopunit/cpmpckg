@@ -22,6 +22,10 @@ CPMAddPackage(
     GIT_TAG 0b9e48fa3df9c184ff1abfb2452fd1a4b696ecd8
     DOWNLOAD_ONLY true)
 	
+if(NOT ${glfw_ADDED})
+	message( FATAL_ERROR "Could not find glfw" )
+endif()
+
 configure_file(patch_CMakeLists.txt ${glfw_SOURCE_DIR}/CMakeLists.txt COPYONLY)
 
 if (${CPM_FOR_TOOLCHAIN})
@@ -29,22 +33,25 @@ if (${CPM_FOR_TOOLCHAIN})
         message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
     endif()
 
+    set(CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/glfw)
+    set(GLFW_BUILD_EXAMPLES Off)
+    set(GLFW_BUILD_TESTS Off)
+    set(GLFW_BUILD_DOCS Off)
+    set(GLFW_INSTALL On)
+    set(GLFW_VULKAN_STATIC Off)
+    
+    add_subdirectory(${glfw_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glfw_cpm_toolchain)
 else()
     if (NOT ${CPM_FOR_RUNTIME})
         message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
     endif()
 
-    ExternalProject_Add(glfw_cpm
-        PREFIX "${CMAKE_BINARY_DIR}"
-        DOWNLOAD_COMMAND ""
-        SOURCE_DIR "${glfw_SOURCE_DIR}"
-        INSTALL_DIR ${CPM_RUNTIME_CACHE}/glfw
-        CMAKE_CACHE_ARGS 
-            -DGLFW_BUILD_EXAMPLES:BOOL=Off
-            -DGLFW_BUILD_TESTS:BOOL=Off
-            -DGLFW_BUILD_DOCS:BOOL=Off
-            -DGLFW_INSTALL:BOOL=On
-            -DGLFW_VULKAN_STATIC:BOOL=Off
-            -DCMAKE_BUILD_TYPE:STRING=${CPM_BUILD_TYPE}
-            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
+    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/glfw)
+    set(GLFW_BUILD_EXAMPLES Off)
+    set(GLFW_BUILD_TESTS Off)
+    set(GLFW_BUILD_DOCS Off)
+    set(GLFW_INSTALL On)
+    set(GLFW_VULKAN_STATIC Off)
+    
+    add_subdirectory(${glfw_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glfw_cpm_runtime)
 endif()
