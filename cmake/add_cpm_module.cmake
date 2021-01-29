@@ -16,9 +16,9 @@ function(add_cpm_module CPM_MODULE_NAME)
     endif()
     
     set(${CPM_MODULE_NAME}_cpm_exists false)
-    #if(EXISTS "${${MODULE_NAME}}" AND IS_DIRECTORY "${${MODULE_NAME}}")
-    #    set(${CPM_MODULE_NAME}_cpm_exists true)
-    #endif()
+    if(EXISTS "${${MODULE_NAME}}" AND IS_DIRECTORY "${${MODULE_NAME}}")
+        set(${CPM_MODULE_NAME}_cpm_exists true)
+    endif()
 
     if(NOT ${CPM_MODULE_NAME}_cpm_exists)
         if (${add_cpm_FOR_TOOLCHAIN})
