@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # ---- Project ----
 
 project(
-  leaf_cpm
+  boostorg_leaf_cpm
   VERSION 1.0
   LANGUAGES CXX
 )
@@ -17,7 +17,7 @@ include(ExternalProject)
 include(${CPM_SCRIPTS}/CPM.cmake)
 
 CPMAddPackage(
-    NAME leaf
+    NAME boostorg_leaf
 	GITHUB_REPOSITORY boostorg/leaf
 	GIT_TAG 0d51eb85ece592c154a8a1515488b50f284eeae5
 	OPTIONS
@@ -28,4 +28,4 @@ CPMAddPackage(
 		"CPM_RUNTIME_CACHE ${CPM_RUNTIME_CACHE}"
 		"CPM_RUNTIME_BUILD_CACHE ${CPM_RUNTIME_BUILD_CACHE}"
         "CMAKE_BUILD_TYPE ${CPM_BUILD_TYPE}"
-        "CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/leaf")
+        "CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/boostorg_leaf")
