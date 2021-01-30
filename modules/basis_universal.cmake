@@ -1,18 +1,24 @@
-add_cpm_module(basis_universal FOR_TOOLCHAIN)
 
-add_executable(cpm_toolchain::basisu IMPORTED GLOBAL)
-set_target_properties(cpm_toolchain::basisu PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/bin/basisu.exe)
+if(NOT TARGET cpm_toolchain::basis_universal OR NOT TARGET cpm_toolchain::basisu)
+	add_cpm_module(basis_universal FOR_TOOLCHAIN)
+	
+	add_executable(cpm_toolchain::basisu IMPORTED GLOBAL)
+	set_target_properties(cpm_toolchain::basisu PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/bin/basisu.exe)
 
-add_library(cpm_toolchain::basis_universal STATIC IMPORTED)
-target_include_directories(cpm_toolchain::basis_universal INTERFACE ${basis_universal_ROOT}/include)
-set_target_properties(cpm_toolchain::basis_universal PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/lib/basis.lib)
-target_compile_definitions(cpm_toolchain::basis_universal INTERFACE BASISU_NO_ITERATOR_DEBUG_LEVEL)
+	add_library(cpm_toolchain::basis_universal STATIC IMPORTED)
+	target_include_directories(cpm_toolchain::basis_universal INTERFACE ${basis_universal_ROOT}/include)
+	set_target_properties(cpm_toolchain::basis_universal PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/lib/basis.lib)
+	target_compile_definitions(cpm_toolchain::basis_universal INTERFACE BASISU_NO_ITERATOR_DEBUG_LEVEL)
+endif()
 
 ####
 
-add_cpm_module(basis_universal)
 
-add_library(cpm_runtime::basis_universal STATIC IMPORTED)
-target_include_directories(cpm_runtime::basis_universal INTERFACE ${basis_universal_ROOT}/include)
-set_target_properties(cpm_runtime::basis_universal PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/lib/basis.lib)
-target_compile_definitions(cpm_runtime::basis_universal INTERFACE BASISU_NO_ITERATOR_DEBUG_LEVEL)
+if(NOT TARGET cpm_runtime::basis_universal)
+	add_cpm_module(basis_universal)
+	
+	add_library(cpm_runtime::basis_universal STATIC IMPORTED)
+	target_include_directories(cpm_runtime::basis_universal INTERFACE ${basis_universal_ROOT}/include)
+	set_target_properties(cpm_runtime::basis_universal PROPERTIES IMPORTED_LOCATION ${basis_universal_ROOT}/lib/basis.lib)
+	target_compile_definitions(cpm_runtime::basis_universal INTERFACE BASISU_NO_ITERATOR_DEBUG_LEVEL)
+endif()
