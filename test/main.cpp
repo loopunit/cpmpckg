@@ -5,6 +5,7 @@
 #include <imgui_markdown.h>
 #include <imgui_console.h>
 #include <imgui_node_editor.h>
+#include <mu_stdlib.h>
 
 static bool canValidateDialog = false;
 
