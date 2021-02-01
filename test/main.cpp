@@ -31,11 +31,11 @@ inline ImGui::MarkdownImageData ImageCallback(ImGui::MarkdownLinkCallbackData da
 // Main code
 int main(int, char**)
 {
-	if (imgui_app_fw::select_platform())
+	if (imgui_app_fw()->select_platform())
 	{
-		if (imgui_app_fw::init())
+		if (imgui_app_fw()->init())
 		{
-			imgui_app_fw::set_window_title("Hello!");
+			imgui_app_fw()->set_window_title("Hello!");
 			
 			ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 			bool show_demo_window = true;
@@ -174,9 +174,9 @@ You can add [links like this one to enkisoftware](https://www.enkisoftware.com/)
   * Lists can have [links like this one to Avoyd](https://www.avoyd.com/)
 )";
 			
-			while (imgui_app_fw::pump())
+			while (imgui_app_fw()->pump())
 			{
-				imgui_app_fw::begin_frame();
+				imgui_app_fw()->begin_frame();
 
 				if (show_demo_window)
 					ImGui::ShowDemoWindow(&show_demo_window);
@@ -470,7 +470,7 @@ You can add [links like this one to enkisoftware](https://www.enkisoftware.com/)
 				}
 #endif
 
-				imgui_app_fw::end_frame(clear_color);
+				imgui_app_fw()->end_frame(clear_color);
 			}
 
 			ed::DestroyEditor(g_Context);
@@ -478,7 +478,7 @@ You can add [links like this one to enkisoftware](https://www.enkisoftware.com/)
 #if 1
 			ImPlot::DestroyContext(plotContext);
 #endif
-			imgui_app_fw::destroy();
+			imgui_app_fw()->destroy();
 		}
 	}
 
