@@ -5,6 +5,10 @@ function(add_cpm_module CPM_MODULE_NAME)
     
     set(MODULE_NAME ${CPM_MODULE_NAME}_ROOT)
 
+	if (DEFINED CPM_${CPM_MODULE_NAME}_SOURCE)
+		set(developer_path -DCPM_${CPM_MODULE_NAME}_SOURCE:PATH=${CPM_${CPM_MODULE_NAME}_SOURCE})
+	endif()
+
     if (${add_cpm_FOR_TOOLCHAIN})
         message(STATUS "Adding ${CPM_MODULE_NAME} to the toolchain stash.")
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_toolchain_build)
@@ -16,10 +20,10 @@ function(add_cpm_module CPM_MODULE_NAME)
     endif()
     
     set(${CPM_MODULE_NAME}_cpm_exists false)
-    if(EXISTS "${${MODULE_NAME}}" AND IS_DIRECTORY "${${MODULE_NAME}}")
-        set(${CPM_MODULE_NAME}_cpm_exists true)
+    if(NOT DEFINED developer_path AND EXISTS "${${MODULE_NAME}}" AND IS_DIRECTORY "${${MODULE_NAME}}")
+		set(${CPM_MODULE_NAME}_cpm_exists true)
     endif()
-
+	
     if(NOT ${CPM_MODULE_NAME}_cpm_exists)
         if (${add_cpm_FOR_TOOLCHAIN})
             execute_process(
@@ -34,6 +38,8 @@ function(add_cpm_module CPM_MODULE_NAME)
                     -DCPM_SOURCE_CACHE:PATH=${CPM_SOURCE_CACHE}
                     -DCPM_RUNTIME_BUILD_CACHE:PATH=${CPM_RUNTIME_BUILD_CACHE}
                     -Dcpmpckg_SOURCE_DIR:PATH=${cpmpckg_SOURCE_DIR}
+                    -DCMAKE_INSTALL_PREFIX:PATH=${CPM_RUNTIME_CACHE}/${CPM_MODULE_NAME}
+					${developer_path}
                     -G Ninja
 		            -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 
 		            -B "${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_toolchain_build"
@@ -58,8 +64,10 @@ function(add_cpm_module CPM_MODULE_NAME)
                     -DCPM_SOURCE_CACHE:PATH=${CPM_SOURCE_CACHE}
                     -DCPM_RUNTIME_BUILD_CACHE:PATH=${CPM_RUNTIME_BUILD_CACHE}
                     -Dcpmpckg_SOURCE_DIR:PATH=${cpmpckg_SOURCE_DIR}
-		            -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 
+                    -DCMAKE_INSTALL_PREFIX:PATH=${CPM_RUNTIME_CACHE}/${CPM_MODULE_NAME}
+					${developer_path}
                     -G Ninja
+		            -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 
 		            -B "${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_runtime_build"
                 WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_runtime_build")
 
