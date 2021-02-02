@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
     NAME imgui_app_fw
     GITHUB_REPOSITORY loopunit/imgui_app_fw.cpmpckg
-	GIT_TAG e6f9c379e8c6b7c43fc0d351d1213a45ba0a2aed
+	GIT_TAG be1a8f158214308be03f29e9771ebf191b8c3b1c
 	OPTIONS
 		"IMGUI_BUILD_APP_FW True"
 		"CPM_SCRIPTS ${CPM_SCRIPTS}"
