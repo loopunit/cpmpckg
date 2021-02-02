@@ -7,7 +7,7 @@ For a workspace in a project, a source cache should be specified:
 Toolchain binaries will be installed here:
 * CPM_TOOLCHAIN_CACHE:PATH=c:\\dev\\.cpm-toolchain-cache 
 
-Runtime binaries, for a given <configuration> will be installed to:
+Runtime binaries, for a given configuration will be installed to:
 * CPM_RUNTIME_CACHE:PATH=c:\\dev\\.cpm-runtime-cache\\x64-Release 
 
 The local view of the aggregator can be specified thusly:
