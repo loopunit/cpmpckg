@@ -1,4 +1,6 @@
 if(NOT TARGET cpm_runtime::imgui_addons)
+	CPMAddBaseModule(imgui)	
+	
 	add_cpm_module(imgui_addons)
 
 	add_library(cpm_runtime::imgui_addons STATIC IMPORTED)

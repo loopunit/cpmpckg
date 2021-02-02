@@ -1,6 +1,6 @@
 if(NOT TARGET cpm_runtime::imgui_app)
-	CPMAddBaseModule(imgui_app_fw)
 	CPMAddBaseModule(imgui_addons)
+	CPMAddBaseModule(imgui_app_fw)
 
 	add_cpm_module(imgui_app)
 

@@ -9,6 +9,10 @@ function(add_cpm_module CPM_MODULE_NAME)
 		set(developer_path -DCPM_${CPM_MODULE_NAME}_SOURCE:PATH=${CPM_${CPM_MODULE_NAME}_SOURCE})
 	endif()
 
+    if (DEFINED CPM_cpmpckg_SOURCE)
+		set(cpm_source -DCPM_cpmpckg_SOURCE:PATH=${CPM_cpmpckg_SOURCE})
+    endif()
+	
     if (${add_cpm_FOR_TOOLCHAIN})
         message(STATUS "Adding ${CPM_MODULE_NAME} to the toolchain stash.")
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_toolchain_build)
@@ -39,6 +43,7 @@ function(add_cpm_module CPM_MODULE_NAME)
                     -DCPM_RUNTIME_BUILD_CACHE:PATH=${CPM_RUNTIME_BUILD_CACHE}
                     -Dcpmpckg_SOURCE_DIR:PATH=${cpmpckg_SOURCE_DIR}
                     -DCMAKE_INSTALL_PREFIX:PATH=${CPM_RUNTIME_CACHE}/${CPM_MODULE_NAME}
+					${cpm_source}
 					${developer_path}
                     -G Ninja
 		            -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 
@@ -65,6 +70,7 @@ function(add_cpm_module CPM_MODULE_NAME)
                     -DCPM_RUNTIME_BUILD_CACHE:PATH=${CPM_RUNTIME_BUILD_CACHE}
                     -Dcpmpckg_SOURCE_DIR:PATH=${cpmpckg_SOURCE_DIR}
                     -DCMAKE_INSTALL_PREFIX:PATH=${CPM_RUNTIME_CACHE}/${CPM_MODULE_NAME}
+					${cpm_source}
 					${developer_path}
                     -G Ninja
 		            -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 

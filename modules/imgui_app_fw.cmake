@@ -1,9 +1,8 @@
 if(NOT TARGET cpm_runtime::imgui_app_fw)
 	CPMAddBaseModule(imgui)
+	CPMAddBaseModule(glfw)
 	CPMAddBaseModule(framegraph)
 	CPMAddBaseModule(basis_universal)
-	CPMAddBaseModule(glfw)
-	CPMAddBaseModule(boostorg_leaf)
 	CPMAddBaseModule(mu_stdlib)
 
 	add_cpm_module(imgui_app_fw)
