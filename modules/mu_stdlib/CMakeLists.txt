@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
     NAME mu_stdlib
     GITHUB_REPOSITORY loopunit/mu_stdlib.cpmpckg
-	GIT_TAG ab6bd459769370cf915de306bf3aad2296f7da62
+	GIT_TAG 58ce11fe483be8f48d14ce3e64b3ec270356af3a
 	OPTIONS
 		"IMGUI_BUILD_APP_FW True"
 		"CPM_SCRIPTS ${CPM_SCRIPTS}"
