@@ -26,8 +26,6 @@ if(NOT ${glfw_ADDED})
 	message( FATAL_ERROR "Could not find glfw" )
 endif()
 
-configure_file(patch_CMakeLists.txt ${glfw_SOURCE_DIR}/CMakeLists.txt COPYONLY)
-
 if (${CPM_FOR_TOOLCHAIN})
     if (${CPM_FOR_RUNTIME})
         message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
