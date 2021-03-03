@@ -4,7 +4,8 @@
     "cmake.configureArgs": [
         "-DCPM_BUILD_TEST:BOOL=on"
     ],
-    "cmake.configureOnOpen": true,
+    "cmake.configureOnOpen": false,
     "cmake.installPrefix": "${workspaceFolder}/out/${buildType}/install",
-    "cmake.buildDirectory": "${workspaceFolder}/out/${buildType}/build"
+    "cmake.buildDirectory": "${workspaceFolder}/out/${buildType}/build",
+    "cmake.configureOnEdit": false
 }
