@@ -23,7 +23,7 @@
     },
     "platform": {
         "default": "${buildKitHostOs}",
-        "description": "Selects the type of platfßorm to build for",
+        "description": "Selects the type of platform to build for",
         "choices": {
             "win32": {
                 "short": "Windows",
