@@ -16,22 +16,11 @@ endif()
 include(ExternalProject)
 include(${CPM_SCRIPTS}/CPM.cmake)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
-
-    CPMAddPackage(
-	    NAME SPIRV_Headers
-	    GITHUB_REPOSITORY KhronosGroup/SPIRV-Headers
-	    GIT_TAG f027d53ded7e230e008d37c8b47ede7cd308e19d
-	    OPTIONS 
-            "SPIRV_HEADERS_SKIP_INSTALL Off"
-		    "SPIRV_HEADERS_SKIP_EXAMPLES On"
-            "CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/SPIRV_Headers")
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-
-endif()
+CPMAddPackage(
+    NAME SPIRV_Headers
+    GITHUB_REPOSITORY KhronosGroup/SPIRV-Headers
+    GIT_TAG f027d53ded7e230e008d37c8b47ede7cd308e19d
+    OPTIONS 
+        "SPIRV_HEADERS_SKIP_INSTALL Off"
+        "SPIRV_HEADERS_SKIP_EXAMPLES On"
+        "CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/SPIRV_Headers")

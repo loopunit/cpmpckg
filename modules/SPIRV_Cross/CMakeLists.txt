@@ -19,23 +19,13 @@ include(${CPM_SCRIPTS}/add_cpm_module.cmake)
 
 CPMAddBaseModule(spirv_headers)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
-
-    CPMAddPackage(
-        NAME SPIRV_Cross
-        GITHUB_REPOSITORY KhronosGroup/SPIRV-Cross
-        GIT_TAG e50f7d1ce8e162d0c826e84168cfa234e4de4ec9
-	    OPTIONS 
-            "ENABLE_CTEST Off"
-            "DBUILD_TESTING Off"
-		    "SPIRV_HEADERS_SKIP_EXAMPLES On"
-            "SPIRV-Headers_SOURCE_DIR ${CPM_TOOLCHAIN_CACHE}/SPIRV_Headers"
-            "CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/SPIRV_Cross")
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-endif()
+CPMAddPackage(
+    NAME SPIRV_Cross
+    GITHUB_REPOSITORY KhronosGroup/SPIRV-Cross
+    GIT_TAG e50f7d1ce8e162d0c826e84168cfa234e4de4ec9
+    OPTIONS 
+        "ENABLE_CTEST Off"
+        "DBUILD_TESTING Off"
+        "SPIRV_HEADERS_SKIP_EXAMPLES On"
+        "SPIRV-Headers_SOURCE_DIR ${CPM_INSTALL_CACHE}/SPIRV_Headers"
+        "CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/SPIRV_Cross")

@@ -34,24 +34,8 @@ set(SPIRV_SKIP_TESTS On)
 set(BUILD_TESTING Off)
 set(SPIRV_CROSS_ENABLE_TESTS Off)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
+set(CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/glslang)
+set(SPIRV-Headers_SOURCE_DIR ${CPM_INSTALL_CACHE}/SPIRV_Headers)
+set(ENABLE_GLSLANG_BINARIES Off)
 
-    #set(CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/glslang)
-    #set(SPIRV-Headers_SOURCE_DIR ${CPM_TOOLCHAIN_CACHE}/SPIRV_Headers)
-	#set(ENABLE_GLSLANG_BINARIES On)
-    #
-    #add_subdirectory(${glslang_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glslang_cpm_toolchain)
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-
-    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/glslang)
-    set(SPIRV-Headers_SOURCE_DIR ${CPM_RUNTIME_CACHE}/SPIRV_Headers)
-	set(ENABLE_GLSLANG_BINARIES Off)
-    
-    add_subdirectory(${glslang_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glslang_cpm_runtime)
-endif()
+add_subdirectory(${glslang_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glslang_cpm_install)

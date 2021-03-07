@@ -51,18 +51,7 @@ configure_file(patch_revision.h                                     ${FrameGraph
 configure_file(patch_VulkanSwapchain.h                              ${FrameGraph_SOURCE_DIR}/extensions/framework/Vulkan/VulkanSwapchain.h COPYONLY)
 configure_file(patch_project_template.cmake.txt                     ${FrameGraph_SOURCE_DIR}/cmake/patch_project_template.cmake COPYONLY)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
+set(CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/FrameGraph)
+set(VulkanMemoryAllocator_SOURCE_DIR ${VulkanMemoryAllocator_SOURCE_DIR})
 
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-
-    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/FrameGraph)
-    set(VulkanMemoryAllocator_SOURCE_DIR ${VulkanMemoryAllocator_SOURCE_DIR})
-
-    add_subdirectory(${FrameGraph_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/FrameGraph_cpm_runtime)
-endif()
+add_subdirectory(${FrameGraph_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/FrameGraph_cpm_install)

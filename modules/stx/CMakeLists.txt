@@ -24,22 +24,11 @@ CPMAddPackage(
 
 configure_file(patch_CMakeLists.txt ${stx_SOURCE_DIR}/CMakeLists.txt COPYONLY)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
-
-    set(CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/stx)
-	set(BUILD_TESTING Off)
-
-    add_subdirectory(${stx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/stx_cpm_toolchain)
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-    
-    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/stx)
-	set(BUILD_TESTING Off)
-    
-    add_subdirectory(${stx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/stx_cpm_runtime)
+if (NOT ${CPM_FOR_INSTALL})
+    message(FATAL_ERROR "CPM_FOR_INSTALL should be true")
 endif()
+
+set(CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/stx)
+set(BUILD_TESTING Off)
+
+add_subdirectory(${stx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/stx_cpm_install)

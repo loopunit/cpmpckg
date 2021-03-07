@@ -11,9 +11,9 @@ project( "FrameGraph"
 
 
 add_library(GLSLang-lib STATIC IMPORTED)
-set(GLSLang-lib_LIB_DIR ${CPM_RUNTIME_CACHE}/glslang/lib)
+set(GLSLang-lib_LIB_DIR ${CPM_INSTALL_CACHE}/glslang/lib)
 set_target_properties(GLSLang-lib PROPERTIES IMPORTED_LOCATION ${GLSLang-lib_LIB_DIR}/glslang.lib)
-target_include_directories(GLSLang-lib INTERFACE ${CPM_RUNTIME_CACHE}/glslang/include ${CPM_RUNTIME_CACHE}/glslang/include/glslang)
+target_include_directories(GLSLang-lib INTERFACE ${CPM_INSTALL_CACHE}/glslang/include ${CPM_INSTALL_CACHE}/glslang/include/glslang)
 target_compile_definitions(GLSLang-lib INTERFACE FG_ENABLE_GLSLANG ENABLE_HLSL)
 
 add_library(VMA-lib INTERFACE)

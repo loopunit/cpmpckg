@@ -29,24 +29,12 @@ endif()
 configure_file(patch_CMakeLists.txt ${mdbx_SOURCE_DIR}/CMakeLists.txt COPYONLY)
 configure_file(patch_mdbx.h++ ${mdbx_SOURCE_DIR}/mdbx.h++ COPYONLY)
 
-if (${CPM_FOR_TOOLCHAIN})
-    if (${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be false")
-    endif()
-
-    set(CMAKE_INSTALL_PREFIX ${CPM_TOOLCHAIN_CACHE}/mdbx)
-	set(MDBX_BUILD_TOOLS On)
-	set(BUILD_TESTING Off)
-
-    add_subdirectory(${mdbx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/mdbx_cpm_toolchain)
-else()
-    if (NOT ${CPM_FOR_RUNTIME})
-        message(FATAL_ERROR "CPM_FOR_RUNTIME should be true")
-    endif()
-    
-    set(CMAKE_INSTALL_PREFIX ${CPM_RUNTIME_CACHE}/mdbx)
-	set(MDBX_BUILD_TOOLS Off)
-	set(BUILD_TESTING Off)
-    
-    add_subdirectory(${mdbx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/mdbx_cpm_runtime)
+if (NOT ${CPM_FOR_INSTALL})
+    message(FATAL_ERROR "CPM_FOR_INSTALL should be true")
 endif()
+
+set(CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/mdbx)
+set(MDBX_BUILD_TOOLS Off)
+set(BUILD_TESTING Off)
+
+add_subdirectory(${mdbx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/mdbx_cpm_install)

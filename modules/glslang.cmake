@@ -1,15 +1,4 @@
-if(NOT TARGET cpm_toolchain::glslangValidator OR NOT TARGET cpm_toolchain::spirv-remap)
-	add_cpm_module(glslang FOR_TOOLCHAIN)
-	add_executable(cpm_toolchain::glslangValidator IMPORTED GLOBAL)
-	set_target_properties(cpm_toolchain::glslangValidator PROPERTIES IMPORTED_LOCATION ${glslang_ROOT}/bin/glslangValidator.exe)
-
-	add_executable(cpm_toolchain::spirv-remap IMPORTED GLOBAL)
-	set_target_properties(cpm_toolchain::spirv-remap PROPERTIES IMPORTED_LOCATION ${glslang_ROOT}/bin/spirv-remap.exe)
-endif()
-
-#
-
-if(NOT TARGET cpm_runtime::glslang)
+if(NOT TARGET cpm_install::glslang)
 	add_cpm_module(glslang)
 	
 	include(${glslang_ROOT}/lib/cmake/HLSLTargets.cmake)
@@ -18,6 +7,6 @@ if(NOT TARGET cpm_runtime::glslang)
 	include(${glslang_ROOT}/lib/cmake/SPVRemapperTargets.cmake)
 	include(${glslang_ROOT}/lib/cmake/glslangTargets.cmake)
 	include(${glslang_ROOT}/lib/cmake/SPIRVTargets.cmake)
-	add_library(cpm_runtime::glslang ALIAS glslang)
-	add_library(cpm_runtime::spirv ALIAS SPIRV)
+	add_library(cpm_install::glslang ALIAS glslang)
+	add_library(cpm_install::spirv ALIAS SPIRV)
 endif()
