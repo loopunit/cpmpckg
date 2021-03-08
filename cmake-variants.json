@@ -8,7 +8,8 @@
                 "long": "Debug",
                 "buildType": "Debug",
                 "settings": {
-                    "CPM_RUNTIME_CACHE" : "${userHome}\\dev\\.cpm-runtime-cache\\x64-Debug"
+                    "CPM_INSTALL_CACHE" : "${userHome}/dev/.cpm-install-cache/x64-Debug",
+                    "CPM_SOURCE_CACHE" : "${userHome}/dev/.cpm-cache"
                 }
             },
             "release": {
@@ -16,30 +17,23 @@
                 "long": "Release",
                 "buildType": "Release",
                 "settings": {
-                    "CPM_RUNTIME_CACHE" : "${userHome}\\dev\\.cpm-runtime-cache\\x64-Release"
+                    "CPM_INSTALL_CACHE" : "${userHome}/dev/.cpm-install-cache/x64-Release",
+                    "CPM_SOURCE_CACHE" : "${userHome}/dev/.cpm-cache"
                 }
             }
         }
     },
     "platform": {
-        "default": "${buildKitHostOs}",
+        "default": "win32",
         "description": "Selects the type of platform to build for",
         "choices": {
             "win32": {
                 "short": "Windows",
-                "long": "Windows",
-                "settings": {
-                    "CPM_SOURCE_CACHE" : "${userHome}\\dev\\.cpm-cache",
-                    "CPM_TOOLCHAIN_CACHE" : "${userHome}\\dev\\.cpm-toolchain-cache"
-                }
+                "long": "Windows"
             },
             "darwin": {
                 "short": "MacOS",
-                "long": "MacOS",
-                "settings": {
-                    "CPM_SOURCE_CACHE" : "${userHome}/dev/.cpm-cache",
-                    "CPM_TOOLCHAIN_CACHE" : "${userHome}/dev/.cpm-toolchain-cache"
-                }
+                "long": "MacOS"
             }
         }
     }    
