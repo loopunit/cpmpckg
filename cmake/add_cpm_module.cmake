@@ -5,14 +5,22 @@ function(add_cpm_module CPM_MODULE_NAME)
     
     set(MODULE_NAME ${CPM_MODULE_NAME}_ROOT)
 
-	if (DEFINED CPM_${CPM_MODULE_NAME}_SOURCE)
-		set(developer_path -DCPM_${CPM_MODULE_NAME}_SOURCE:PATH=${CPM_${CPM_MODULE_NAME}_SOURCE})
-	endif()
-
-    if (DEFINED CPM_cpmpckg_SOURCE)
-		set(cpm_source -DCPM_cpmpckg_SOURCE:PATH=${CPM_cpmpckg_SOURCE})
+    if (DEFINED CPM_DEV_ROOT AND EXISTS "${CPM_DEV_ROOT}/${CPM_MODULE_NAME}.cpmpckg" AND EXISTS "${CPM_DEV_ROOT}/${CPM_MODULE_NAME}.cpmpckg/CMakeLists.txt")
+        set(developer_path -DCPM_${CPM_MODULE_NAME}_SOURCE:PATH=${CPM_DEV_ROOT}/${CPM_MODULE_NAME}.cpmpckg})
+    elseif (DEFINED CPM_${CPM_MODULE_NAME}_SOURCE)
+        set(developer_path -DCPM_${CPM_MODULE_NAME}_SOURCE:PATH=${CPM_${CPM_MODULE_NAME}_SOURCE})
     endif()
-	
+
+    if (DEFINED CPM_DEV_ROOT)
+        set(devroot_path -DCPM_DEV_ROOT:PATH=${CPM_DEV_ROOT})
+    endif()
+
+    if (DEFINED CPM_DEV_ROOT AND EXISTS "${CPM_DEV_ROOT}/cpmpckg" AND EXISTS "${CPM_DEV_ROOT}/cpmpckg/CMakeLists.txt")
+        set(cpm_source -DCPM_cpmpckg_SOURCE:PATH=${CPM_DEV_ROOT}/cpmpckg)
+    elseif (DEFINED CPM_cpmpckg_SOURCE)
+        set(cpm_source -DCPM_cpmpckg_SOURCE:PATH=${CPM_cpmpckg_SOURCE})
+    endif()
+
     message(STATUS "Adding ${CPM_MODULE_NAME} to the install stash.")
     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_install_build)
     set(${MODULE_NAME} ${CPM_INSTALL_CACHE}/${CPM_MODULE_NAME})
@@ -36,6 +44,7 @@ function(add_cpm_module CPM_MODULE_NAME)
                 -DCMAKE_INSTALL_PREFIX:PATH=${CPM_INSTALL_CACHE}/${CPM_MODULE_NAME}
                 ${cpm_source}
                 ${developer_path}
+                ${devroot_path}
                 -G Ninja
                 -S "${cpmpckg_SOURCE_DIR}/modules/${CPM_MODULE_NAME}" 
                 -B "${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_install_build"
