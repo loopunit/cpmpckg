@@ -1,5 +1,5 @@
 if(NOT TARGET cpm_install::glslang)
-	add_cpm_module(glslang)
+	add_cpm_module(glslang NO_TARGETS)
 	
 	include(${glslang_ROOT}/lib/cmake/HLSLTargets.cmake)
 	include(${glslang_ROOT}/lib/cmake/OGLCompilerTargets.cmake)

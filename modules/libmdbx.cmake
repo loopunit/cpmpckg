@@ -1,5 +1,5 @@
 if(NOT TARGET cpm_install::mdbx)
-	add_cpm_module(mdbx)
+	add_cpm_module(mdbx NO_TARGETS)
 
 	add_library(mdbx_install STATIC IMPORTED)
 	set_target_properties(mdbx_install PROPERTIES IMPORTED_LOCATION ${mdbx_ROOT}/lib/mdbx.lib)

@@ -1,7 +1,7 @@
 if(NOT TARGET cpm_install::framegraph_framework OR NOT TARGET cpm_install::framegraph_vulkanloader OR NOT TARGET cpm_install::framegraph_stl OR NOT TARGET cpm_install::framegraph_pipelinecompiler OR NOT TARGET cpm_install::framegraph)
 	CPMAddBaseModule(glslang)
 
-	add_cpm_module(framegraph)
+	add_cpm_module(framegraph NO_TARGETS)
 	add_library(cpm_install::framegraph_framework STATIC IMPORTED)
 	set_target_properties(cpm_install::framegraph_framework PROPERTIES IMPORTED_LOCATION ${framegraph_ROOT}/lib/Framework.lib)
 

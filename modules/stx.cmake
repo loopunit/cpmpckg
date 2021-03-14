@@ -1,5 +1,5 @@
 if(NOT TARGET cpm_install::stx)
-	add_cpm_module(stx)
+	add_cpm_module(stx NO_TARGETS)
 
 	add_library(cpm_install::stx STATIC IMPORTED)
 	target_include_directories(cpm_install::stx INTERFACE ${stx_ROOT}/include)

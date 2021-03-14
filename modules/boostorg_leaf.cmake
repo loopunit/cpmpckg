@@ -1,5 +1,5 @@
 if(NOT TARGET cpm_install::boostorg_leaf)
-	add_cpm_module(boostorg_leaf)
+	add_cpm_module(boostorg_leaf NO_TARGETS)
 
 	add_library(
 		cpm_install::boostorg_leaf

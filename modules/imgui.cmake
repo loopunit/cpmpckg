@@ -1,5 +1,5 @@
 if(NOT TARGET cpm_install::imgui)
-	add_cpm_module(imgui)
+	add_cpm_module(imgui NO_TARGETS)
 
 	add_library(cpm_install::imgui STATIC IMPORTED)
 	target_include_directories(cpm_install::imgui INTERFACE ${imgui_ROOT}/include)
