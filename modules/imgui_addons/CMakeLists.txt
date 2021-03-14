@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
     NAME imgui_addons
     GITHUB_REPOSITORY loopunit/imgui_addons.cpmpckg
-	GIT_TAG 3ea1fe0d60a75b13fa71691f1eef71a37cf5c3dd
+	GIT_TAG 29eeddd88b1b272aa7e635695747d4b40564fc4f
 	OPTIONS
 		"CPM_DEV_ROOT:PATH=${CPM_DEV_ROOT}"
 		"CPM_SCRIPTS:PATH=${CPM_SCRIPTS}"
