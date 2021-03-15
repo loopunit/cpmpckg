@@ -38,3 +38,13 @@ set(MDBX_BUILD_TOOLS Off)
 set(BUILD_TESTING Off)
 
 add_subdirectory(${mdbx_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/mdbx_cpm_install)
+
+if(MSVC)
+  if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set_target_properties(mdbx PROPERTIES IMPORTED_CONFIGURATIONS "Debug")
+    set_target_properties(mdbx PROPERTIES COMPILE_PDB_NAME mdbx COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+    set_target_properties(mdbx PROPERTIES IMPORTED_CONFIGURATIONS "RelWithDebInfo")
+    set_target_properties(mdbx PROPERTIES COMPILE_PDB_NAME mdbx COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  endif()
+endif()

@@ -35,3 +35,13 @@ set(BASIS_BUILD_LIBRARY True)
 set(BUILD_TESTING Off)
 
 add_subdirectory(${basis_universal_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/basis_universal_cpm_install)
+
+if(MSVC)
+  if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set_target_properties(basis PROPERTIES IMPORTED_CONFIGURATIONS "Debug")
+    set_target_properties(basis PROPERTIES COMPILE_PDB_NAME basis COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+    set_target_properties(basis PROPERTIES IMPORTED_CONFIGURATIONS "RelWithDebInfo")
+    set_target_properties(basis PROPERTIES COMPILE_PDB_NAME basis COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  endif()
+endif()

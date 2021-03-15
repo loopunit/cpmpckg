@@ -25,7 +25,7 @@ if(NOT ${glfw_ADDED})
 	message( FATAL_ERROR "Could not find glfw" )
 endif()
 
-if (NOT ${CPM_FOR_INSTALL})
+if(NOT ${CPM_FOR_INSTALL})
     message(FATAL_ERROR "CPM_FOR_INSTALL should be true")
 endif()
 
@@ -37,3 +37,13 @@ set(GLFW_INSTALL On)
 set(GLFW_VULKAN_STATIC Off)
 
 add_subdirectory(${glfw_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/glfw_cpm_install)
+
+if(MSVC)
+  if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set_target_properties(glfw PROPERTIES IMPORTED_CONFIGURATIONS "Debug")
+    set_target_properties(glfw PROPERTIES COMPILE_PDB_NAME glfw3 COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+    set_target_properties(glfw PROPERTIES IMPORTED_CONFIGURATIONS "RelWithDebInfo")
+    set_target_properties(glfw PROPERTIES COMPILE_PDB_NAME glfw3 COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  endif()
+endif()

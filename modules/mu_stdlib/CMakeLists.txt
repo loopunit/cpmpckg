@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
     NAME mu_stdlib
     GITHUB_REPOSITORY loopunit/mu_stdlib.cpmpckg
-	GIT_TAG d990a346e2443f98667d6f2d5b9bffcbf1dcd70b
+	GIT_TAG 5944821d5255bc897fb4a9d6e6aa779ab7cf6207
 	OPTIONS
 		"CPM_DEV_ROOT:PATH=${CPM_DEV_ROOT}"
 		"CPM_SCRIPTS:PATH=${CPM_SCRIPTS}"
