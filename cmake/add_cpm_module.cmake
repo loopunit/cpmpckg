@@ -1,12 +1,22 @@
 set(CPM_SCRIPTS "${CMAKE_CURRENT_LIST_DIR}")
 
+if(DEFINED CPM_INSTALL_CACHE)
+    get_filename_component(CPM_INSTALL_CACHE_ABS ${CPM_INSTALL_CACHE} ABSOLUTE)
+    set(CPM_INSTALL_CACHE ${CPM_INSTALL_CACHE_ABS})
+endif()
+
+if(DEFINED CPM_SOURCE_CACHE)
+    get_filename_component(CPM_SOURCE_CACHE_ABS ${CPM_SOURCE_CACHE} ABSOLUTE)
+    set(CPM_SOURCE_CACHE ${CPM_SOURCE_CACHE_ABS})
+endif()
+
 function(add_cpm_module CPM_MODULE_NAME)
     if(NOT TARGET cpm_install::${CPM_MODULE_NAME})
         message(STATUS "CPMPCKG: Adding cpm_install::${CPM_MODULE_NAME}")
 
         cmake_parse_arguments(arg "NO_TARGETS" "" "DEPENDENCIES" ${ARGN})
         
-        set(MODULE_NAME ${CPM_MODULE_NAME}_ROOT)
+        set(MODULE_NAME_ROOT_VAR ${CPM_MODULE_NAME}_ROOT)
         
         if(DEFINED CPM_DEV_ROOT)
         message(STATUS "CPMPCKG: Resolving CPM_DEV_ROOT")
@@ -49,11 +59,13 @@ function(add_cpm_module CPM_MODULE_NAME)
 
             message(STATUS "CPMPCKG: Adding ${CPM_MODULE_NAME} to the install stash.")
             file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_install_build)
-            set(${MODULE_NAME} ${CPM_INSTALL_CACHE}/${CPM_MODULE_NAME})
+            
+            get_filename_component(MODULE_NAME_ROOT_VAR_TMP ${CPM_INSTALL_CACHE}/${CPM_MODULE_NAME} ABSOLUTE)
+            set(${MODULE_NAME_ROOT_VAR} ${MODULE_NAME_ROOT_VAR_TMP})
             
             set(${CPM_MODULE_NAME}_cpm_exists false)
-            if(NOT DEFINED developer_path_arg AND EXISTS "${${MODULE_NAME}}" AND IS_DIRECTORY "${${MODULE_NAME}}")
-            message(STATUS "CPMPCKG: ${MODULE_NAME} already exists")
+            if(NOT DEFINED developer_path_arg AND EXISTS "${${MODULE_NAME_ROOT_VAR}}" AND IS_DIRECTORY "${${MODULE_NAME_ROOT_VAR}}")
+            message(STATUS "CPMPCKG: ${MODULE_NAME_ROOT_VAR} already exists")
                 set(${CPM_MODULE_NAME}_cpm_exists true)
             endif()
             
@@ -92,7 +104,7 @@ function(add_cpm_module CPM_MODULE_NAME)
                     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${CPM_MODULE_NAME}_cpm_install_build")
             endif()
             
-            set(${MODULE_NAME} ${${MODULE_NAME}} PARENT_SCOPE)
+            set(${MODULE_NAME_ROOT_VAR} ${${MODULE_NAME_ROOT_VAR}} PARENT_SCOPE)
         
             if(NOT ${arg_NO_TARGETS})
                 message(STATUS "CPMPCKG: Installing module targets")
