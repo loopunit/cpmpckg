@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
 	NAME imgui
 	GITHUB_REPOSITORY ocornut/imgui
-	GIT_TAG ac08593b9645aee7e086b1e9b98a6a1d79d09210
+	GIT_TAG 31290807dc169d4ee62b16f42bcb1d9a294be93b
 	DOWNLOAD_ONLY TRUE)
 
 if(NOT ${imgui_ADDED})

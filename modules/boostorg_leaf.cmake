@@ -7,7 +7,7 @@ if(NOT TARGET cpm_install::boostorg_leaf)
 	
 	set_target_properties(cpm_install::boostorg_leaf PROPERTIES 
 		INTERFACE_COMPILE_FEATURES 
-			cxx_std_17)
+			cxx_std_20)
 	
 	target_include_directories(
 		cpm_install::boostorg_leaf
