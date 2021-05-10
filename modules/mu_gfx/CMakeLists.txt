@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
     NAME mu_gfx
     GITHUB_REPOSITORY loopunit/mu_gfx.cpmpckg
-	GIT_TAG 71b5d35a80023236c0e2eccdacbfdab7cf15b789
+	GIT_TAG 85cd509407b06d4036c57145efee444cf90b81f3
 	OPTIONS
 		"CPM_DEV_ROOT:PATH=${CPM_DEV_ROOT}"
 		"CPM_SCRIPTS:PATH=${CPM_SCRIPTS}"
