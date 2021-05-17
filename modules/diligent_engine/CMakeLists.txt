@@ -19,7 +19,7 @@ include(${CPM_SCRIPTS}/CPM.cmake)
 CPMAddPackage(
 	NAME diligent_engine
 	GITHUB_REPOSITORY DiligentGraphics/DiligentEngine
-	GIT_TAG 4bf163ceb1f5463dab6590e2282c97befb1f5bc9
+	GIT_TAG 29c34ef834111a1dfb7da3cc71c478d08db60f69
 	DOWNLOAD_ONLY TRUE)
 
 if(NOT ${diligent_engine_ADDED})

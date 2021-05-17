@@ -27,6 +27,8 @@ if(NOT ${imgui_ADDED})
 endif()
 
 configure_file(patch_CMakeLists.txt ${imgui_SOURCE_DIR}/CMakeLists.txt COPYONLY)
+configure_file(patch_imconfig.h ${imgui_SOURCE_DIR}/imconfig.h COPYONLY)
+configure_file(patch_imconfig.cpp ${imgui_SOURCE_DIR}/imconfig.cpp COPYONLY)
 
 set(CMAKE_INSTALL_PREFIX ${CPM_INSTALL_CACHE}/imgui)
 set(BUILD_TESTING Off)

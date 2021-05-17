@@ -13,6 +13,7 @@ file(GLOB headers
 	"${imgui_SOURCE_DIR}/imstb_truetype.h")
 
 file(GLOB sources 
+	"${imgui_SOURCE_DIR}/imconfig.cpp"
 	"${imgui_SOURCE_DIR}/imgui.cpp"
 	"${imgui_SOURCE_DIR}/imgui_demo.cpp"
 	"${imgui_SOURCE_DIR}/imgui_draw.cpp"
