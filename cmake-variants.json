@@ -8,8 +8,8 @@
                 "long": "Debug",
                 "buildType": "Debug",
                 "settings": {
-                    "CPM_INSTALL_CACHE" : "${userHome}/dev/.cpm-install-cache/x64-Debug",
-                    "CPM_SOURCE_CACHE" : "${userHome}/dev/.cpm-cache"
+                    "CPM_INSTALL_CACHE" : "${env:MU_DEV_ROOT}/.cpm-install-cache/x64-Debug",
+                    "CPM_SOURCE_CACHE" : "${env:MU_DEV_ROOT}/.cpm-cache"
                 }
             },
             "release": {
@@ -17,8 +17,8 @@
                 "long": "Release",
                 "buildType": "Release",
                 "settings": {
-                    "CPM_INSTALL_CACHE" : "${userHome}/dev/.cpm-install-cache/x64-Release",
-                    "CPM_SOURCE_CACHE" : "${userHome}/dev/.cpm-cache"
+                    "CPM_INSTALL_CACHE" : "${env:MU_DEV_ROOT}/.cpm-install-cache/x64-Release",
+                    "CPM_SOURCE_CACHE" : "${env:MU_DEV_ROOT}/.cpm-cache"
                 }
             }
         }
